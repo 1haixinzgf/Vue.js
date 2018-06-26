@@ -1,5 +1,6 @@
 <template>
-    <button class="el-button" :class="[type? 'el-button--'+type: '',
+    <button  :type="nativeType" @click="handleClick"
+     class="el-button" :class="[type? 'el-button--'+type: '',
      {'is-disabled': buttonDisabled,'is-loading': loading}]"
      :disabled="buttonDisabled">
      <i class="el-icon-loading" v-if="loading"></i>
@@ -21,6 +22,16 @@ export default {
         icon: {
             type: String,
             default: ''
+        },
+        nativeType: {
+            type: String,
+            default: 'button'
+        }
+    },
+    methods: {
+        handleClick(evt) {
+            // console.log(evt)
+            this.$emit('click', evt);
         }
     },
     computed: {
