@@ -6,14 +6,22 @@
     </ele-radio-group> -->
     <!-- <login></login>
     <p v-html="content"></p> -->
-    <comment>
 
-    </comment>
+
+
+    <!-- <comment>
+
+    </comment> -->
+
+
+
+    <article-table></article-table>
   </div>
 </template>
 
 <script>
 // @表示alias地址短链接，在哪里都指向src，让地址引入更加轻松
+import ArticleTable from '@/views/ArticleTable'
 import Login from '@/views/Login';
 import EleRadioGroup from '@/components/EleRadioGroup';
 import EleRadio from '@/components/EleRadio';
@@ -30,7 +38,8 @@ export default {
     Login,
     EleRadioGroup,
     EleRadio,
-    Comment
+    Comment,
+    ArticleTable
   },
   
 }
