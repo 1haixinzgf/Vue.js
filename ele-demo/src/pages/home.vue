@@ -1,6 +1,6 @@
 <template>
     <div>
-        <head-top signin-up="home">
+        <head-top signinUp="home">
             <span slot="logo" class="head_logo">ele.me</span><!--只会放置name为logo的slot -->
         </head-top>
         <nav class="city_nav">
@@ -8,14 +8,14 @@
                 <span>当前定位的城市</span>
                 <span>定位不准时，请在城市列表中选择</span>
             </div>
-            <router-link :to="'city'+ guessCityid" class="guess_city">
+            <router-link :to="'city/'+ guessCityid" class="guess_city">
                 <span>{{guessCity}}</span>
             </router-link>
         </nav>
         <section id="hot_city_container">
             <h4 class="city_title">热门城市</h4>
             <ul class="cityListul clear">
-                <router-link :to="'city'+item.id" v-for="item in hotcity" :key="item.id" tag="li">{{item.name}}</router-link>
+                <router-link :to="'city/'+item.id" v-for="item in hotcity" :key="item.id" tag="li">{{item.name}}</router-link>
             </ul>
         </section>
     </div>
@@ -37,20 +37,32 @@ export default {
     },
 
     // 生命周期获取城市不准确，而且耗时的api 阻塞组件渲染
-    mounted () {
-        cityGuess()
-        .then(res => res.json())//fetch之后是二进制流
-        .then(data => {
-            console.log(data)
-            this.guessCityid = data.id
-            this.guessCity = data.name
-        })
-        hotcity()
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            this.hotcity = data
-        })
+   async mounted () {
+        // cityGuess()
+        // .then(res => res.json())//fetch之后是二进制流
+        // .then(data => {
+        //     console.log(data)
+        //     // console.log(2222)
+        //     this.guessCityid = data.id
+        //     this.guessCity = data.name
+        // })
+        // hotcity()
+        // .then(res => res.json())
+        // .then(data => {
+        //     console.log(data)
+        //     // console.log(2222)
+        //     this.hotcity = data
+        // })
+
+
+        const cityData =await cityGuess()
+        this.guessCityid = cityData.id
+        this.guessCity = cityData.name
+
+
+        const hotcityData =await hotcity()
+        // console.log(hotcityData)
+        this.hotcity = hotcityData
     }
 }
 </script>
