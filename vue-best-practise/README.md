@@ -1,5 +1,2 @@
-modules entries
-
-state mutations actions
-
-entries v-for
+# Vue.js
+vue.js学习之旅
