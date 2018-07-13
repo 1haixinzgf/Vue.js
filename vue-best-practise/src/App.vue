@@ -1,5 +1,14 @@
 <template>
   <div id="app">
+    <p>
+      FullName: {{ fullName }}
+    </p>
+    <p>
+      FirstName: <input type="text" v-model="firstName" />
+    </p>
+    <p>obj.a {{obj.a}}</p>
+    <p>obj.a <input type="text" v-model="obj.a"></p>
+    <main-component></main-component>
     <nav class="navbar navbar-default">
       <div class="container">
         <a href="" class="navbar-brand">
@@ -28,11 +37,47 @@
 </template>
 
 <script>
+import MainComponent from '@/components/MainComponent'
 import Sidebar from '@/components/Sidebar'
 export default {
+  data () {
+    return {
+      firstName: '海',
+      lastName: '心',
+      fullName: '',
+      obj: {
+        a: 2
+      }
+    }
+  },
+  watch: {
+    // firstName (newName, oldName) {
+    //   // console.log(newName, oldName)
+    //   this.fullName = newName + ' ' + this.lastName
+    // } // 看到两个值的变化，可以监听所有的东西
+    firstName: {
+      handler (newName, oldName) {
+        this.fullName = newName + ' ' + this.lastName
+      },
+      immediate: true
+    },
+    obj: {
+      handler (newName, oldName) {
+        console.log('obj.a change')
+      },
+      immediate: true,
+      deep: true
+    }
+  },
+  // computed: {
+  //   fullName () {
+  //     return `${this.firstName} ${this.lastName}`
+  //   }
+  // },
   name: 'App',
   components: {
-    Sidebar
+    Sidebar,
+    MainComponent
   }
 }
 </script>
